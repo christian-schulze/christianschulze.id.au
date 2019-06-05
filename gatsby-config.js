@@ -1,17 +1,22 @@
 const path = require("path")
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     author: `Christian Schulze`,
     description: `A personal blog covering mechanical keyboards, hobby electronics and programming.`,
     siteUrl: `https://christianschulze.id.au`,
     socials: {
-      twitter: `https://twitter.com/cschulze1977`,
       email: `mailto://christian.schulze@gmail.com`,
       linkedin: `https://www.linkedin.com/in/christian-schulze/`,
       github: `https://github.com/christian-schulze`,
+      twitter: `https://twitter.com/cschulze1977`,
     },
     title: `Christian's blog`,
+    disqusShortName: process.env.GATSBY_DISQUS_SHORT_NAME,
   },
   plugins: [
     `gatsby-plugin-catch-links`,
@@ -45,6 +50,7 @@ module.exports = {
         layouts: path.join(__dirname, "src/layouts"),
         posts: path.join(__dirname, "src/content/posts"),
         styles: path.join(__dirname, "src/styles"),
+        src: path.join(__dirname, "src"),
         utils: path.join(__dirname, "src/utils"),
       },
     },
@@ -59,8 +65,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `christians-blog`,
+        short_name: `christians-blog`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
@@ -79,11 +85,5 @@ module.exports = {
     },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: `christianschulze`,
-      },
-    },
   ],
 }

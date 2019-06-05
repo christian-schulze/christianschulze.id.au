@@ -1,21 +1,28 @@
 import React from "react"
 import { graphql } from "gatsby"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
-import Disqus from "gatsby-plugin-disqus"
+import { DiscussionEmbed } from "disqus-react"
 
 import Layout from "layouts/Layout"
 
 const PostLayout = ({ data }) => {
-  const id = data.mdx.id
-  const body = data.mdx.code.body
+  const { id } = data.mdx
+  const { body } = data.mdx.code
   const { path, title } = data.mdx.frontmatter
-  const siteUrl = data.site.siteMetadata.siteUrl
+  const { siteUrl } = data.site.siteMetadata
+
+  const { disqusShortName } = data.site.siteMetadata
+  const disqusConfig = {
+    identifier: id,
+    title: title,
+    url: `${siteUrl}${path}`,
+  }
 
   return (
     <Layout>
       <h1>{title}</h1>
       <MDXRenderer>{body}</MDXRenderer>
-      <Disqus identifier={id} title={title} url={`${siteUrl}${path}`} />
+      <DiscussionEmbed shortname={disqusShortName} config={disqusConfig} />
     </Layout>
   )
 }

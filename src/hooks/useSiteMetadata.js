@@ -3,15 +3,16 @@ import { useStaticQuery, graphql } from "gatsby"
 export const siteMetadataFragment = graphql`
   fragment SiteSiteMetadata on Site {
     siteMetadata {
-      title
-      description
       author
+      description
+      disqusShortName
       socials {
-        twitter
         email
-        linkedin
         github
+        linkedin
+        twitter
       }
+      title
     }
   }
 `
