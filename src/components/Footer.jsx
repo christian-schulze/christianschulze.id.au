@@ -29,7 +29,7 @@ const Footer = ({ className }) => (
               Built with
               {` `}
               <a href="https://www.gatsbyjs.org">Gatsby</a>,&nbsp;
-              <a href="https://github.com/christian-schulze/christianschulze.au.id">
+              <a href="https://github.com/christian-schulze/christianschulze.id.au">
                 source code on github
               </a>
             </small>

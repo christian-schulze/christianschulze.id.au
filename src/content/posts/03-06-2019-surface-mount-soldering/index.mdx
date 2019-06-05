@@ -1,0 +1,102 @@
+---
+date: 2019-06-03T15:22:33.962Z
+description: "I've been tinkering with DIY electronics and mechanical keyboards
+for many years. And have finally decided to design and manufacture my own
+keyboard layout and PCB."
+draft: true
+path: "/smt-soldering-and-cheap-ebay-parts"
+title: "SMT soldering and cheap ebay parts"
+---
+
+> **TL;DR** Surface mount soldering was not as hard as anticipated.
+
+I've been tinkering with DIY electronics and mechanical keyboards for many
+years. And have finally decided to design and manufacture my own keyboard
+layout and PCB.
+
+The brains or **MCU**<sup>micro-controller unit</sup> of the keyboard will be
+the **ATmega32U4**, which is also used in
+[Arduino Leonado](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) and
+[Teensy 2.0](https://www.pjrc.com/store/teensy.html) boards.
+
+<img src="./atmega32u4-and-coin.jpg" alt="atmega32u4-and-coin" />
+
+> The ATmega32U4 comes in a TQFP-44 lead package. Is 10x10x1mm with 0.8mm pitch
+> leads.
+
+The keyboard schematic will be based largely on the Teensy 2.0, without the
+voltage regulator and LED.
+
+<img src="./teensy2-schematic.jpg" alt="teensy2-schematic" />
+
+<p />
+
+Before getting too far into PCB design however, I wanted to prototype the
+circuit on a breadboard, with a small 4x4 key/switch matrix. So onto the next
+phase...
+
+### Soldering a TQFP-44 package MCU onto a breakout board
+
+To make the MCU breadboard friendly we can solder it to a breakout board. I
+picked up some _cheap-as-chips_<sup>tm</sup> TQFP-44 breakout boards from ebay,
+do you notice the problem with them?
+
+<img src="./bare-tqfp44-breakout-top.jpg" alt="bare-tqfp44-breakout-top" />
+
+> top
+
+<img
+  src="./bare-tqfp44-breakout-bottom.jpg"
+  alt="bare-tqfp44-breakout-bottom"
+/>
+
+> bottom
+
+Pins 8 to 15 and 30 to 37 don't have through hole solder pads like the rest.
+So lesson learned, pay extra attention to photos when purchasing these things
+on ebay.
+
+Fortunately right angle male headers can be soldered directly
+onto the pads.
+
+<img
+  src="./soldered-tqfp44-breakout-bottom.jpg"
+  alt="soldered-tqfp44-breakout-bottom"
+/>
+
+<p />
+
+Soldering the mcu involved the following steps:
+
+- Place mcu with a pair of tweezers. Align the mcu so the dark circle is
+  closest to the white dot on the board.
+- Hold mcu in place with a pencil or whatever you have handy, apply rosin to a
+  corner pin and solder.
+
+  <sup>
+    (This tacks the mcu in place and allows you to re-solder if alignment needs
+    fixing)
+  </sup>
+
+- Apply rosin to all pins on the opposite side to the one you tacked.
+- In one continuous motion apply the soldering tip and solder, while dragging
+  across each of the pins.
+
+  <sup>(This is where the rosin really helps.)</sup>
+
+- Repeat for the remaining sides and pins.
+
+If any pins have bridged or didn't solder correctly, you can re-drag the
+soldering tip over affected pins to fix.
+
+<img
+  src="./soldered-tqfp44-breakout-top.jpg"
+  alt="soldered-tqfp44-breakout-top"
+/>
+
+<img src="./breadboard.jpg" alt="breadboard" />
+
+> Success!
+
+Next post we will wire up a USB-C port, 16Mhz crystal and supporting resistors
+and capacitors.

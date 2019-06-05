@@ -6,7 +6,7 @@ import { Normalize } from "styled-normalize"
 import { LocationContext } from "components/LocationContext"
 import GlobalStyles from "styles/GlobalStyles"
 import { rhythm } from "utils/typography"
-import { LargeHeader, SmallHeader } from "components/Headers"
+import { LargeHeader, SmallHeader } from "components/headers"
 import Footer from "components/Footer"
 
 const Container = styled.div`
