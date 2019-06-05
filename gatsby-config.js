@@ -1,16 +1,57 @@
+const path = require("path")
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    author: `Christian Schulze`,
+    description: `A personal blog covering mechanical keyboards, hobby electronics and programming.`,
+    siteUrl: `https://christianschulze.id.au`,
+    socials: {
+      twitter: `https://twitter.com/cschulze1977`,
+      email: `mailto://christian.schulze@gmail.com`,
+      linkedin: `https://www.linkedin.com/in/christian-schulze/`,
+      github: `https://github.com/christian-schulze`,
+    },
+    title: `Christian's blog`,
   },
   plugins: [
+    `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/content/posts`,
+        name: "posts",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-page-creator`,
+      options: {
+        path: `${__dirname}/src/content/pages`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        components: path.join(__dirname, "src/components"),
+        hooks: path.join(__dirname, "src/hooks"),
+        images: path.join(__dirname, "src/images"),
+        layouts: path.join(__dirname, "src/layouts"),
+        posts: path.join(__dirname, "src/content/posts"),
+        styles: path.join(__dirname, "src/styles"),
+        utils: path.join(__dirname, "src/utils"),
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -24,11 +65,25 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/gatsby-icon.png`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/layouts/Layout.jsx"),
+        },
+        gatsbyRemarkPlugins: [`gatsby-remark-images`],
+      },
+    },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `christianschulze`,
+      },
+    },
   ],
 }
