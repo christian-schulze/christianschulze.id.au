@@ -2,9 +2,15 @@ import React, { useCallback, useRef } from "react"
 import { navigate } from "gatsby-link"
 import styled from "styled-components"
 
+import { uriEncodeHtmlElements } from "utils/dom"
 import Bio from "components/Bio"
 import Layout from "layouts/Layout"
 import SEO from "components/Seo"
+
+const SubmissionError = styled.span`
+  color: red;
+  margin: 16px 0;
+`
 
 const Form = styled.form`
   width: 100%;
@@ -26,20 +32,6 @@ const TextArea = styled.textarea`
   width: 100%;
 `
 
-const encode = elements => {
-  return Array.from(elements)
-    .reduce((encodedFields, { name, value }) => {
-      if (value.length > 0) {
-        encodedFields.push(
-          encodeURIComponent(name) + "=" + encodeURIComponent(value)
-        )
-      }
-
-      return encodedFields
-    }, [])
-    .join("&")
-}
-
 const Contact = () => {
   const submitErrorRef = useRef("")
 
@@ -52,7 +44,7 @@ const Contact = () => {
       await fetch("/?no-cache=1", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode(form.elements),
+        body: uriEncodeHtmlElements(form.elements),
       })
       navigate(form.getAttribute("action"))
     } catch (error) {
@@ -73,7 +65,7 @@ const Contact = () => {
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <span ref={submitErrorRef} className="form-error" />
+        <SubmissionError ref={submitErrorRef} className="form-error" />
         <div hidden>
           <Label>
             {"Don’t fill this out: "}
