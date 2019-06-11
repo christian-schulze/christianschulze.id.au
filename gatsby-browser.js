@@ -7,11 +7,17 @@ import SyntaxHighlighterCodeBlock from "components/SyntaxHighlighterCodeBlock"
 import { LocationContext } from "components/LocationContext"
 
 const components = {
-  a: ({ children, ...props }) => (
-    <a {...props} target="_blank" rel="noopener">
-      {children}
-    </a>
-  ),
+  a: ({ children, href, ...props }) => {
+    if (href.startsWith("/")) {
+      return <a {...props}>{children}</a>
+    } else {
+      return (
+        <a {...props} target="_blank" rel="noopener">
+          {children}
+        </a>
+      )
+    }
+  },
   pre: props => {
     if (props.children.props["react-live"]) {
       return <LiveEditorCodeBlock {...props} />

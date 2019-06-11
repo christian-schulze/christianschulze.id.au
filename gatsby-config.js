@@ -10,7 +10,7 @@ module.exports = {
     description: `A personal blog covering mechanical keyboards, hobby electronics and programming.`,
     siteUrl: `https://christianschulze.id.au`,
     socials: {
-      email: `mailto://christian.schulze@gmail.com`,
+      email: `/contact`,
       linkedin: `https://www.linkedin.com/in/christian-schulze/`,
       github: `https://github.com/christian-schulze`,
       twitter: `https://twitter.com/cschulze1977`,

@@ -46,19 +46,32 @@ const Container = styled.div`
   }
 `
 
-const Socials = ({ className, socials }) => (
-  <Container className={className}>
-    <ul>
-      {Object.keys(socials).map(name => (
-        <li key={name}>
-          <a href={socials[name]} rel="noopener noreferrer" target="_blank">
-            <Icon icon={getIcon(name)} />
-          </a>
-        </li>
-      ))}
-    </ul>
-  </Container>
-)
+const Link = ({ children, href, ...props }) =>
+  href.startsWith("/") ? (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ) : (
+    <a href={href} rel="noopener noreferrer" target="_blank" {...props}>
+      {children}
+    </a>
+  )
+
+const Socials = ({ className, socials }) => {
+  return (
+    <Container className={className}>
+      <ul>
+        {Object.keys(socials).map(name => (
+          <li key={name}>
+            <Link href={socials[name]}>
+              <Icon icon={getIcon(name)} />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  )
+}
 
 Socials.propTypes = {
   className: PropTypes.string,
