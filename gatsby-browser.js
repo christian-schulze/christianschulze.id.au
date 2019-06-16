@@ -9,10 +9,14 @@ import { LocationContext } from "components/LocationContext"
 const components = {
   a: ({ children, href, ...props }) => {
     if (href.startsWith("/")) {
-      return <a {...props}>{children}</a>
+      return (
+        <a href={href} {...props}>
+          {children}
+        </a>
+      )
     } else {
       return (
-        <a {...props} target="_blank" rel="noopener">
+        <a href={href} {...props} target="_blank" rel="noopener noreferrer">
           {children}
         </a>
       )
